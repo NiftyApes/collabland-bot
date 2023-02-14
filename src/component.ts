@@ -4,11 +4,11 @@
 // License text available at https://opensource.org/licenses/MIT
 
 import {Component} from '@loopback/core';
-import {HelloActionController} from './actions/hello-action.controller.js';
+import {NiftyapesController} from './actions/niftyapes.controller';
 
 /**
  * Register all services including command handlers, job runners and services
  */
 export class HelloActionComponent implements Component {
-  controllers = [HelloActionController];
+  controllers = [NiftyapesController];
 }

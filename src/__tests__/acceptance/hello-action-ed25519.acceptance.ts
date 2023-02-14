@@ -7,8 +7,9 @@ import {expect, givenHttpServerConfig} from '@loopback/testlab';
 import {HelloActionApplication} from '../../application.js';
 import {main as client} from '../../client.js';
 import {main} from '../../server.js';
+import {ApplicationCommandType} from '@collabland/discord';
 
-describe('HelloAction - ed25519', () => {
+describe('NiftyApes - ed25519', () => {
   let app: HelloActionApplication;
   let signingKey: string;
 
@@ -23,31 +24,50 @@ describe('HelloAction - ed25519', () => {
 
   it('invokes action with ecdsa signature', async () => {
     const result = await client(
-      app.restServer.url + '/hello-action',
+      app.restServer.url + '/niftyapes',
       'ed25519:' + signingKey,
     );
     expect(result.metadata.applicationCommands).to.eql([
       {
         metadata: {
-          name: 'HelloAction',
-          shortName: 'hello-action',
+          name: 'NiftyApes Marketplace',
+          shortName: 'niftyapes',
         },
-        name: 'hello-action',
-        type: 1,
-        description: '/hello-action',
-        options: [
-          {
-            name: 'your-name',
-            description: "Name of person we're greeting",
-            type: 3,
-            required: true,
-          },
-        ],
+        name: 'buy',
+        type: ApplicationCommandType.ChatInput,
+        description: 'Buy NFTs on the niftyapes.money marketplace',
+      },
+      {
+        metadata: {
+          name: 'NiftyApes Marketplace',
+          shortName: 'niftyapes',
+        },
+        name: 'sell',
+        type: ApplicationCommandType.ChatInput,
+        description: 'Sell NFTs on the niftyapes.money marketplace',
+      },
+      {
+        metadata: {
+          name: 'NiftyApes Marketplace',
+          shortName: 'niftyapes',
+        },
+        name: 'borrow',
+        type: ApplicationCommandType.ChatInput,
+        description: 'Use your NFTs as collateral',
+      },
+      {
+        metadata: {
+          name: 'NiftyApes Marketplace',
+          shortName: 'niftyapes',
+        },
+        name: 'follow',
+        type: ApplicationCommandType.ChatInput,
+        description: 'Follow NiftyApes and never miss important news',
       },
     ]);
     expect(result.response).to.eql({
       type: 4,
-      data: {content: 'Hello, John!', flags: 64},
+      data: {content: 'Buy on niftyapes.money', flags: 64},
     });
   });
 });

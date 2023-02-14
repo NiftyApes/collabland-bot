@@ -30,14 +30,7 @@ export const MOCKED_INTERACTION: APIChatInputApplicationCommandInteraction = {
   data: {
     guild_id: '929214449733230592',
     id: '1063553299804078151',
-    name: 'hello-action',
-    options: [
-      {
-        name: 'your-name',
-        type: ApplicationCommandOptionType.String,
-        value: 'John',
-      },
-    ],
+    name: 'buy',
     type: ApplicationCommandType.ChatInput,
   },
   guild_id: '929214449733230592',
@@ -78,7 +71,7 @@ export async function main(base?: string, signingKey?: string) {
 
   const interaction = MOCKED_INTERACTION;
   const fetch = getFetch();
-  const url = base ?? 'http://localhost:3000/hello-action';
+  const url = base ?? 'http://localhost:3000/niftyapes';
   const result = await fetch(`${url}/metadata`);
   const metadata = await handleFetchResponse<DiscordActionMetadata>(result);
   if (base == null) {
